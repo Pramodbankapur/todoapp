@@ -1,16 +1,14 @@
-import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 
-const app = express();
-const PORT = 5000;
+import app from "./app";
+import connectDB from "./config/db";
 
-app.get("/", (_req, res) => {
-  res.send("ROOT OK");
-});
+const PORT = process.env.PORT || 4000;
 
-app.get("/api/health", (_req, res) => {
-  res.json({ status: "Backend is alive ✅" });
-});
+// CONNECT TO DB FIRST
+connectDB();
 
 app.listen(PORT, () => {
-  console.log("SERVER STARTED ON PORT", PORT);
+  console.log(`Server running on port ${PORT}`);
 });
